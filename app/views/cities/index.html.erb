@@ -1,0 +1,38 @@
+<h4 class="widgettitle">List Provinsi</h4>
+<table class="table table-bordered" id="dyntable">
+ <colgroup>
+    <col class="con0" style="align: center; width: 4%" />
+    <col class="con1" />
+    <col class="con0" />
+ </colgroup>
+    <thead>
+        <tr>
+            <th class="head0 nosort">No.</th>
+            <th class="head0">Nama Kota</th>
+            <th class="head0">Nama Provinsi</th>
+            <th class="head1">Status</th>
+            <th class="head1">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% i = 1
+      for city in @cities %>
+        <tr class="gradeX">
+            <td class="aligncenter">
+                <span class="center">
+                    <%= i %>
+                </span>
+            </td>
+            <td><%= city.name %></td>
+            <td><%= city.state.name %></td>
+            <td><%= city.city_status == 1? "Aktif" : "Belum Aktif" %></td>
+            <td><%= link_to "<span class='icon-search'></span> Lihat".html_safe, city %> | <%= link_to "<span class='icon-edit'></span> Edit".html_safe, edit_state_path(city) %> | <%= link_to "<span class='icon-trash'></span> Delete".html_safe, city, method: :delete, confirm: 'Anda yakin?' %></td>
+        </tr>
+      <% i += 1
+      end %>
+    </tbody>
+</table>
+
+<p>
+<%= link_to "<span class='icon-plus'></span> Kota Baru".html_safe, new_city_path, class: "btn btn-primary" %>
+</p>

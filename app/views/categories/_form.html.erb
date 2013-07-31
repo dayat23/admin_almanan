@@ -1,0 +1,28 @@
+<%= form_for(@category, html: { class: 'form-horizontal well' }) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <p class="f_legend">Kategori Baru</p>
+    <div class="control-group">
+      <label class="control-label">Nama Kategori</label>
+      <div class="controls">
+        <%= f.text_field :name, class: 'span4' %>
+        <span class="help-block">Nama kategori harus diisi</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Simpan', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

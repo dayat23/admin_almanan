@@ -1,0 +1,20 @@
+{"sEcho":"<%= @account_members["sEcho"] %>",
+"iTotalRecords":<%= @account_members["iTotalRecords"] %>,
+"iTotalDisplayRecords":<%= @account_members["iTotalDisplayRecords"] %>,
+"aaData":[
+<% 
+count = 0
+@account_members["aaData"].each do |account_member| 
+%>
+  [
+  "<%= link_to(account_member.first_name + ' '+ account_member.last_name, account_member).tr('"', "'").html_safe %>",
+  "<%= account_member.email %>",
+  "<%= account_member.status == 1? "Aktif" : "Non Aktif" %>",
+  "<%= action_datatable_helper(account_member,edit_account_member_path(account_member), account_member_path(account_member)) %>"
+  ]
+  <%= ","  if count < (@account_members["aaData"].length - 1) %>
+  <% 
+  count = count + 1
+end 
+%>]
+}

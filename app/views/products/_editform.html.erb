@@ -1,0 +1,52 @@
+<h4 class="widgettitle nomargin shadowed">Ubah Produk</h4>
+<div class="widgetcontent bordered shadowed nopadding">
+  <%= form_for(@product, html: { class: "stdform stdform2"}) do |f| %>
+  
+    <p>
+      <label>Kategori</label>
+      <span class="field">
+        <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true, class: "input-xxlarge" %>
+      </span>
+    </p>
+
+    <p>
+      <label>Kode Produk</label>
+      <span class="field">
+        <%= f.text_field :code_product, class: "input-xxlarge" %>
+      </span>
+    </p>
+
+    <p>
+      <label>Nama Produk</label>
+      <span class="field">
+        <%= f.text_field :name_product, class: "input-xxlarge" %>
+      </span>
+    </p>
+
+    <p>
+      <label>Stok</label>
+      <span class="field">
+        <%= f.number_field :stock, class: "input-xxlarge" %>
+      </span>
+    </p>
+
+    <p>
+      <label>Harga</label>
+      <span class="field">
+        <%= f.number_field :price, class: "input-xxlarge" %>
+      </span>
+    </p>
+
+    <p>
+      <label>Keterangan Produk</label>
+      <span class="field">
+        <%= f.text_area :description, class: "input-xxlarge", style: "width: 400px; height: 230px;" %>
+      </span>
+    </p>
+
+    <p class="stdformbutton">
+      <%= button_tag 'Ubah', class: "btn btn-primary" %>
+      <%= link_to 'Back', products_path, class: "btn" %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,63 @@
+<%= javascript_include_tag :cocoon %>
+<%= simple_form_for(@product, html: { class: "form-horizontal well"}) do |f| %>
+    <fieldset>
+    <p class="f_legend"><%= @resource_title %></p>
+    <div class="control-group">
+      <label class="control-label"><%= f.label :category, 'Kategori' %></label>
+      <div class="controls">
+        <%= f.association :category, label: false, prompt: "-- Pilih Kategori --", class: "span4" %>
+        <span class="help-block">kategori harus dipilih</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label"><%= f.label :name_product, 'Nama Produk' %></label>
+      <div class="controls">
+        <%= f.input :name_product, label: false, class: "span4" %>
+        <span class="help-block">Nama produk harus diisi</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label"><%= f.label :stock, 'Stok Barang' %></label>
+      <div class="controls">
+        <%= f.input :stock, label: false, class: "span4" %>
+        <span class="help-block">stok barang harus diisi</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label"><%= f.label :price, 'Harga Barang' %></label>
+      <div class="controls">
+        <%= f.input :price, label: false, class: "span4" %>
+        <span class="help-block">harga barang harus diisi</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label"><%= f.label :description, 'Keterangan Produk' %></label>
+      <div class="controls">
+        <%= f.input :description, label: false, input_html: { rows: "5", cols: "30"}, class: "span4" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#photo">Upload Foto</a></li>
+        </ul>
+                   
+        <div class="tab-content">
+          <div class="tab-pane active" id="photo">
+            <%= f.simple_fields_for :photo_products, @product.photo_products, multipart: true do |photo| %>
+              <%= render 'photo_product_fields', :f => photo %>
+            <% end %>
+            <%= link_to_add_association 'Tambah Foto', f, :photo_products, :class => "btn btn-inverse" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Simpan', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </fieldset>
+  <% end %>

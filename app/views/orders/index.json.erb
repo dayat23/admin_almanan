@@ -1,0 +1,26 @@
+{"sEcho":"<%= @orders["sEcho"] %>",
+"iTotalRecords":<%= @orders["iTotalRecords"] %>,
+"iTotalDisplayRecords":<%= @orders["iTotalDisplayRecords"] %>,
+"aaData":[
+<% 
+count = 0
+@orders["aaData"].each do |order|
+  order.transactions.each do |transaction|
+    if order.id == transaction.order_id
+      @sukses = transaction.success
+    end
+  end
+%>
+  [
+  "<%= link_to(order.account_member.first_name + ' '+ order.account_member.last_name, order.account_member).tr('"', "'").html_safe %>",
+  "<%= link_to(order.code_order, order).tr('"', "'").html_safe %>",
+  "<%= @sukses == true ? "Sudah dibayar" : '' %>",
+  "<%= order.status == 1? "Sudah Dikirim" : "Belum Dikirim" %>",
+  "<%= action_datatable_helper(order,edit_order_path(order), order_path(order)) %>"
+  ]
+  <%= ","  if count < (@orders["aaData"].length - 1) %>
+  <% 
+  count = count + 1
+end 
+%>]
+}

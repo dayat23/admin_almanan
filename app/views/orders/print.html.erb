@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- Bootstrap framework -->
+        <%= stylesheet_link_tag 'bootstrap/css/bootstrap.min' %>
+
+        <script>
+            //* hide all elements & show preloader
+            document.documentElement.className += 'js';
+            window.print();
+        </script>
+    </head>
+    <body>
+        <div id="contentwrapper">
+                <div class="main_content">
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <h1 class="invoice_heading">Order #<%= @order.code_order %></h1>
+                        </div>
+                        <div class="span4">
+                            <p class="sepH_a"><span class="muted sepV_b">No. Order</span><strong><%= @order.code_order %></strong></p>
+                            <p class="sepH_a"><span class="muted sepV_b">Tanggal Order</span><strong><%= @order.created_at.strftime('%d/%m/%Y') %></strong></p>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <p><strong class="muted">From</strong></p>
+                            <address>
+                                <strong>CV Al-Mannan</strong><br>
+                                Jl. Menur 5 no 18<br>
+                                Surabaya, 60118<br>
+                                <abbr title="Phone">P:</abbr> (031) 593-22-35
+                            </address>  
+                        </div>
+                        <div class="span4">
+                            <p><strong class="muted">To</strong></p>
+                            <address>
+                                <strong><%= @order.account_member.first_name %> <%= @order.account_member.first_name %></strong><br>
+                                <%= @order.account_member.address %><br>
+                                <%= @order.account_member.city.name %> - <%= @order.account_member.state.name %><br>
+                                <abbr title="Phone">P:</abbr> <%= @order.account_member.phone %>
+                            </address>  
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pembeli</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kode Produk</th>
+                                        <th>Biaya</th>
+                                        <th>Qty</th>
+                                        <th class="invoice_tar" style="text-align:right;">Subtotal Biaya</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>Muhammad Hidayatulloh</td>
+                                    <td>Baju</td>
+                                    <td>0978</td>
+                                    <td>Rp. 5.000</td>
+                                    <td>1</td>
+                                    <td class="invoice_tar" style="text-align:right;">Rp. 5.000</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">&nbsp;</td>
+                                    <td class="invoice_tar" style="text-align:right;">
+                                        <p class="sepH_a"><strong><span class="sepV_b">Subtotal Biaya</span>Rp. 5.000</strong></p>
+                                        <p class="sepH_a"><strong><span class="sepV_b">Biaya Ongkir</span>Rp. 9.000</strong></p>
+                                        <p class="sepH_a text-success" style="color: #468847"><strong><span class="sepV_b">Total Biaya</span>Rp. 14.000</strong></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </body>
+</html>

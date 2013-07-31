@@ -1,0 +1,19 @@
+{"sEcho":"<%= @categories["sEcho"] %>",
+"iTotalRecords":<%= @categories["iTotalRecords"] %>,
+"iTotalDisplayRecords":<%= @categories["iTotalDisplayRecords"] %>,
+"aaData":[
+<% 
+count = 0
+@categories["aaData"].each do |category| 
+%>
+  [
+  "<%= link_to(category.name, category).tr('"', "'").html_safe %>",
+  "<%= category.status == 1? "Aktif" : "Non Aktif" %>",
+  "<%= action_datatable_helper(category,edit_category_path(category), category_path(category)) %>"
+  ]
+  <%= ","  if count < (@categories["aaData"].length - 1) %>
+  <% 
+  count = count + 1
+end 
+%>]
+}

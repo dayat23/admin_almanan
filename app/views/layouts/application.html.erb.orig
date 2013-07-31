@@ -1,0 +1,301 @@
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CV Al-Mannan AdminPanel</title>
+<%= stylesheet_link_tag "admin_app/style.default" %>
+<%= stylesheet_link_tag "admin_app/prettify/prettify" %>
+<%= javascript_include_tag "admin_app/prettify/prettify" %>
+<%= javascript_include_tag "admin_app/jquery-1.9.1.min" %>
+<%= javascript_include_tag "admin_app/jquery-migrate-1.1.1.min" %>
+<%= javascript_include_tag "admin_app/jquery-ui-1.9.2.min" %>
+<%= javascript_include_tag "admin_app/jquery.flot.min" %>
+<%= javascript_include_tag "admin_app/jquery.flot.resize.min" %>
+<%= javascript_include_tag "admin_app/bootstrap.min" %>
+<%= javascript_include_tag "admin_app/jquery.cookie" %>
+<%= javascript_include_tag "admin_app/custom" %>
+<%= javascript_include_tag "admin_app/jquery.dataTables.min" %>
+<%= javascript_include_tag "jquery_ujs" %>
+<!-- <%= javascript_include_tag "ckeditor/init" %> -->
+
+<%= csrf_meta_tags %>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+<div class="mainwrapper">
+	
+    <!-- START OF LEFT PANEL -->
+    <div class="leftpanel">
+    	
+        <div class="logopanel">
+        	<h1><%= link_to "CV Al-Mannan".html_safe, root_path %></h1>
+        </div><!--logopanel-->
+        
+        <div class="datewidget">Today is <%= Time.now.strftime("%A, %d %B %Y %H:%M%p") %></div>
+    
+    	<div class="searchwidget">
+        	<!-- <form action="results.html" method="post">
+            	<div class="input-append">
+                    <input type="text" class="span2 search-query" placeholder="Search here...">
+                    <button type="submit" class="btn"><span class="icon-search"></span></button>
+                </div>
+            </form> -->
+        </div><!--searchwidget-->
+        
+        <!-- <div class="plainwidget">
+        	<small>Using 16.8 GB of your 51.7 GB </small>
+        	<div class="progress progress-info">
+                <div class="bar" style="width: 20%"></div>
+            </div>
+            <small><strong>38% full</strong></small>
+        </div><!--plainwidget-->
+        
+        <div class="leftmenu">        
+            <%= render 'layouts/navigation' %>
+
+            <div class="accordion-body collapse in" id="collapse7">
+                                            <div class="accordion-inner">
+                                                <form name="Calc" id="calc">
+                                                    <div class="formSep control-group input-append">
+                                                        <input type="text" style="width:130px" name="Input" /><button type="button" class="btn" name="clear" value="c" onclick="Calc.Input.value = ''"><i class="icon-remove"></i></button>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="button" class="btn btn-large" name="seven" value="7" onclick="Calc.Input.value += '7'" />
+                                                        <input type="button" class="btn btn-large" name="eight" value="8" onclick="Calc.Input.value += '8'" />
+                                                        <input type="button" class="btn btn-large" name="nine" value="9" onclick="Calc.Input.value += '9'" />
+                                                        <input type="button" class="btn btn-large" name="div" value="/" onclick="Calc.Input.value += ' / '">
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="button" class="btn btn-large" name="four" value="4" onclick="Calc.Input.value += '4'" />
+                                                        <input type="button" class="btn btn-large" name="five" value="5" onclick="Calc.Input.value += '5'" />
+                                                        <input type="button" class="btn btn-large" name="six" value="6" onclick="Calc.Input.value += '6'" />
+                                                        <input type="button" class="btn btn-large" name="times" value="x" onclick="Calc.Input.value += ' * '" />
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="button" class="btn btn-large" name="one" value="1" onclick="Calc.Input.value += '1'" />
+                                                        <input type="button" class="btn btn-large" name="two" value="2" onclick="Calc.Input.value += '2'" />
+                                                        <input type="button" class="btn btn-large" name="three" value="3" onclick="Calc.Input.value += '3'" />
+                                                        <input type="button" class="btn btn-large" name="minus" value="-" onclick="Calc.Input.value += ' - '" />
+                                                    </div>
+                                                    <div class="formSep control-group">
+                                                        <input type="button" class="btn btn-large" name="dot" value="." onclick="Calc.Input.value += '.'" />
+                                                        <input type="button" class="btn btn-large" name="zero" value="0" onclick="Calc.Input.value += '0'" />
+                                                        <input type="button" class="btn btn-large" name="DoIt" value="=" onclick="Calc.Input.value = Math.round( eval(Calc.Input.value) * 1000)/1000" />
+                                                        <input type="button" class="btn btn-large" name="plus" value="+" onclick="Calc.Input.value += ' + '" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                         </div>
+        </div><!--leftmenu-->
+        
+    </div><!--mainleft-->
+    <!-- END OF LEFT PANEL -->
+    
+    <!-- START OF RIGHT PANEL -->
+    <div class="rightpanel">
+    	<div class="headerpanel">
+        	<a href="" class="showmenu"></a>
+            
+            <div class="headerright">
+            	<div class="dropdown notification">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/page.html">
+                    	<%= @messages.count %> <span class="iconsweets-globe iconsweets-white"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                    	<li class="nav-header">Notifications</li>
+                        <!-- <li>
+                        	<a href="">
+                        	<strong>3 people viewed your profile</strong><br />
+                            <img src="img/thumbs/thumb1.png" alt="" />
+                            <img src="img/thumbs/thumb2.png" alt="" />
+                            <img src="img/thumbs/thumb3.png" alt="" />
+                            </a>
+                        </li> -->
+                        <% if @messages.blank? %>
+                            <li class="nav-header">Tidak ada pesan baru</li>
+                        <% else %>
+                            <% @messages.each do |message| %>
+                            <li><%= link_to message do %><span class="icon-envelope"></span> New message from <strong><%= message.full_name %></strong> <small class="muted"> - <%= time_ago_in_words(message.created_at) %> ago</small><% end %></li>
+                            <% end %>
+                            <!-- <li><a href=""><span class="icon-envelope"></span> New message from <strong>Daniel</strong> <small class="muted"> - 2 days ago</small></a></li>
+                            <li><a href=""><span class="icon-user"></span> <strong>Bruce</strong> is now following you <small class="muted"> - 2 days ago</small></a></li> -->
+                            <li class="viewmore"><a href="">View More Notifications</a></li>
+                        <% end %>
+                    </ul>
+                </div><!--dropdown-->
+                
+    			<div class="dropdown userinfo">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="#">Hi, <%= "#{current_admin_user.email}" %><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <!-- <li><a href="editprofile.html"><span class="icon-edit"></span> Edit Profile</a></li> -->
+                        <li><%= link_to "<span class='icon-edit'></span>Ganti Password".html_safe, '#' %></li>
+                        <!-- <li><a href=""><span class="icon-eye-open"></span> Privacy Settings</a></li> -->
+                        <li class="divider"></li>
+                        <li><%= link_to "<span class='icon-off'></span>Sign out".html_safe, destroy_admin_user_session_path, :method => :delete %></li>
+                    </ul>
+                </div><!--dropdown-->
+    		
+            </div><!--headerright-->
+            
+    	</div><!--headerpanel-->
+        <div class="breadcrumbwidget">
+        	<!-- <ul class="skins">
+                <li><a href="default" class="skin-color default"></a></li>
+                <li><a href="orange" class="skin-color orange"></a></li>
+                <li><a href="dark" class="skin-color dark"></a></li>
+                <li>&nbsp;</li>
+                <li class="fixed"><a href="" class="skin-layout fixed"></a></li>
+                <li class="wide"><a href="" class="skin-layout wide"></a></li>
+            </ul><!--skins-->
+        	<ul class="breadcrumb">
+                <li><%= link_to 'Home', root_path %> <span class="divider">/</span></li>
+                <li class="active"><%= @active %></li>
+            </ul>
+        </div><!--breadcrumbwidget-->
+        <div class="pagetitle">
+        	<h1><%= @title %></h1> <span><%= @description %></span>
+        </div><!--pagetitle-->
+        
+        <div class="maincontent">
+        	<div class="contentinner content-dashboard">
+                <% if notice %>
+                	<div class="alert alert-info">
+                    	<button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Selamat!</strong> <%= notice %>
+                    </div><!--alert-->
+                <% end %>
+                
+                <% if alert %>
+                    <% if alert.length > 1 %>
+                        <div class="alert alert-error">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <% alert.each do |msg, value| %>
+                          <ul>
+                            <li><strong>Error!</strong> <%= value.join(',') %></li>
+                          </ul>
+                          <% end %>
+                        </div>
+                    <% else %>
+                      <% if alert.kind_of?(Array) == false %>
+                          <% alert.each do |msg, value| %>
+                            <div class="alert alert-error">
+                              <button type="button" class="close" data-dismiss="alert">×</button>
+                              <strong>Error!</strong>
+                              <%= value.join(',') %>
+                            </div>
+                          <% end %>
+                      <% else %>
+                        <div class="alert alert-error">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <strong>Error!</strong>
+                          <%= alert %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                <% end %>
+                <div class="row-fluid">
+
+                	<%= yield %>
+
+                </div><!--row-fluid-->
+            </div><!--contentinner-->
+        </div><!--maincontent-->
+        
+    </div><!--mainright-->
+    <!-- END OF RIGHT PANEL -->
+    
+    <div class="clearfix"></div>
+    
+    <div class="footer">
+    	<div class="footerleft">CV Al-Mannan AdminPanel</div>
+    	<div class="footerright">&copy; <%= Date.today.year %> CV Al-Mannan</div>
+    </div><!--footer-->
+
+    
+</div><!--mainwrapper-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+								
+		// basic chart
+		// var flash = [[0, 2], [1, 6], [2,3], [3, 8], [4, 5], [5, 13], [6, 8]];
+		// var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
+			
+		// function showTooltip(x, y, contents) {
+		// 	jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+		// 		position: 'absolute',
+		// 		display: 'none',
+		// 		top: y + 5,
+		// 		left: x + 5
+		// 	}).appendTo("body").fadeIn(200);
+		// }
+	
+			
+		// var plot = jQuery.plot(jQuery("#chartplace2"),
+		// 	   [ { data: flash, label: "Flash(x)", color: "#fb6409"}, { data: html5, label: "HTML5(x)", color: "#096afb"} ], {
+		// 		   series: {
+		// 			   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+		// 			   points: { show: true }
+		// 		   },
+		// 		   legend: { position: 'nw'},
+		// 		   grid: { hoverable: true, clickable: true, borderColor: '#ccc', borderWidth: 1, labelMargin: 10 },
+		// 		   yaxis: { min: 0, max: 15 }
+		// 		 });
+		
+		// var previousPoint = null;
+		// jQuery("#chartplace2").bind("plothover", function (event, pos, item) {
+		// 	jQuery("#x").text(pos.x.toFixed(2));
+		// 	jQuery("#y").text(pos.y.toFixed(2));
+			
+		// 	if(item) {
+		// 		if (previousPoint != item.dataIndex) {
+		// 			previousPoint = item.dataIndex;
+						
+		// 			jQuery("#tooltip").remove();
+		// 			var x = item.datapoint[0].toFixed(2),
+		// 			y = item.datapoint[1].toFixed(2);
+						
+		// 			showTooltip(item.pageX, item.pageY,
+		// 							item.series.label + " of " + x + " = " + y);
+		// 		}
+			
+		// 	} else {
+		// 	   jQuery("#tooltip").remove();
+		// 	   previousPoint = null;            
+		// 	}
+		
+		// });
+		
+		// jQuery("#chartplace2").bind("plotclick", function (event, pos, item) {
+		// 	if (item) {
+		// 		jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+		// 		plot.highlight(item.series, item.datapoint);
+		// 	}
+		// });
+
+
+		// bar graph
+		// var d2 = [];
+		// for (var i = 0; i <= 10; i += 1)
+		// 	d2.push([i, parseInt(Math.random() * 30)]);
+			
+		// var stack = 0, bars = true, lines = false, steps = false;
+		// jQuery.plot(jQuery("#bargraph2"), [ d2 ], {
+		// 	series: {
+		// 		stack: stack,
+		// 		lines: { show: lines, fill: true, steps: steps },
+		// 		bars: { show: bars, barWidth: 0.6 }
+		// 	},
+		// 	grid: { hoverable: true, clickable: true, borderColor: '#bbb', borderWidth: 1, labelMargin: 10 },
+		// 	colors: ["#06c"]
+		// });
+		
+		// calendar
+		jQuery('#calendar').datepicker();
+
+
+});
+</script>
+</body>
+</html>

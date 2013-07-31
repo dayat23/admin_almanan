@@ -1,0 +1,95 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3 class="heading">Produk <%= @product.name_product %> Detail</h3>
+    <fieldset>
+      <div class="control-group">
+        <label class="control-label">Kategori</label>
+        <div class="controls text_line">
+          <strong><%= link_to @product.category.name, @product.category %></strong>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Kode Produk</label>
+        <div class="controls text_line">
+          <strong><%= @product.code_product %></strong>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Nama Produk</label>
+        <div class="controls text_line">
+          <strong><%= @product.name_product %></strong>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Harga Produk</label>
+        <div class="controls text_line">
+          <strong><%= number_to_currency @product.price, unit: "Rp. ", precision: 0 %></strong>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Stock Produk</label>
+        <div class="controls text_line">
+          <strong><%= @product.stock %> </strong>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Keterangan Produk</label>
+        <div class="controls text_line">
+          <strong><%= @product.description %> </strong>
+        </div>
+      </div>
+      <div class="control-group formSep">
+        <label class="control-label">Status</label>
+        <div class="controls text_line">
+          <strong><%= @product.status == 1? "Aktif" : "Belum Aktif" %> </strong>
+        </div>
+      </div>
+
+      <div class="tabbable tabbable-bordered formSep">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab_image" data-toggle="tab">Foto Produk</a></li>
+          <li><a href="#tab_review" data-toggle="tab">Review Produk</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab_image">
+            <div>
+              <ul>
+              <% @product.photo_products.each do |image| %>
+                <li>
+                  <%= image_tag image.image_product_url, alt: 'No Photo', class: "thumbnail", size: "200x150"  %>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab_review">
+            <div>
+              <ul>
+              <% @product.review_products.each do |review| %>
+                <% if review.account_member_id.blank? %>
+                  <li>
+                    Review dari Anonymous<br>
+                    <%= review.description %>
+                  </li>
+                <% else %>
+                  <li>
+                    Review dari <%= review.account_member.first_name %> <%= review.account_member.last_name %><br>
+                    <%= review.description %> 
+                  </li>
+                <% end %>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+          <%= link_to 'Back', products_path, class: "btn" %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>

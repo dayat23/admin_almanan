@@ -1,0 +1,83 @@
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <h1 class="invoice_heading">Order #<%= @order.code_order %></h1>
+                        </div>
+                        <div class="span4">
+                            <p class="sepH_a"><span class="muted sepV_b">No. Order</span><strong><%= @order.code_order %></strong></p>
+                            <p class="sepH_a"><span class="muted sepV_b">Tanggal Order</span><strong><%= @order.created_at.strftime('%d/%m/%Y') %></strong></p>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <p><strong class="muted">From</strong></p>
+                            <address>
+                                <strong>CV Al-Mannan</strong><br>
+                                Jl. Menur 5 no 18<br>
+                                Surabaya, 60118<br>
+                                <abbr title="Phone">P:</abbr> (031) 593-22-35
+                            </address>  
+                        </div>
+                        <div class="span4">
+                            <p><strong class="muted">To</strong></p>
+                            <address>
+                                <strong><%= @order.account_member.first_name %> <%= @order.account_member.first_name %></strong><br>
+                                <%= @order.account_member.address %><br>
+                                <%= @order.account_member.city.name %> - <%= @order.account_member.state.name %><br>
+                                <abbr title="Phone">P:</abbr> <%= @order.account_member.phone %>
+                            </address>  
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pembeli</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kode Produk</th>
+                                        <th>Biaya</th>
+                                        <th>Qty</th>
+                                        <th class="invoice_tar" style="text-align:right;">Subtotal Biaya</th>
+                                    </tr>
+                                </thead>
+                                <% @order.line_items.each do |item| %>
+                                <tr>
+                                    <td><%= @order.account_member.first_name %> <%= @order.account_member.last_name %> </td>
+                                    <td><%= item.product.name_product %></td>
+                                    <td><%= item.product.code_product %></td>
+                                    <td><%= number_to_currency(item.product.price, unit: "IDR ", precision: 0, delimiter: '.') %></td>
+                                    <td><%= item.quantity %></td>
+                                    <td class="invoice_tar" style="text-align:right;"><%= number_to_currency(item.total_price , unit: "IDR ", precision: 0, delimiter: '.') %></td>
+                                </tr>
+                                <% end %>
+                                <tr>
+                                    <td colspan="5">&nbsp;</td>
+                                    <td class="invoice_tar" style="text-align:right;">
+                                        <p class="sepH_a"><strong><span class="sepV_b">Subtotal Biaya</span><%= number_to_currency(@order.total_price , unit: "IDR ", precision: 0, delimiter: '.') %></strong></p>
+                                        <p class="sepH_a"><strong><span class="sepV_b">Biaya Ongkir</span><%= number_to_currency(@order.destination.price , unit: "IDR ", precision: 0, delimiter: '.') %></strong></p>
+                                        <p class="sepH_a text-success" style="color: #468847"><strong><span class="sepV_b">Total Biaya</span><%= number_to_currency(@order.total_all_price , unit: "IDR ", precision: 0, delimiter: '.') %></strong></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <%= link_to 'Cetak Order', '#', class: 'btn btn-primary', onclick: 'printpage()' %>
+                            <%= link_to 'Back', orders_path, class: 'btn' %>
+                        </div>
+                    </div>
+<script>
+function printpage()
+{
+    popupwindow('/printorder/<%= @order.id %>', 'printorder', 700, 500);
+}
+
+function popupwindow(url, title, w, d)
+{
+    // window.open('/printorder/<%= @order.id %>', 'printorder', 'width=700,height=500');
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(d/2);
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+d+', top='+top+', left='+left);
+}
+</script>

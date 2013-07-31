@@ -1,0 +1,8 @@
+<div class='formSep nested-fields'>
+	<%= f.input :image_product, as: :file, label: false %>
+		<% if params[:action] == 'edit' %>
+			<%= image_tag f.object.image_product_url, alt: 'No Photo', class: "thumbnail", size: "200x150" %>
+		<% end %>
+<%= f.input :description, input_html: {rows: "5", cols: "30"}, class: "span4" %>
+<%= link_to_remove_association "Hapus Foto", f, :class => "btn" %>
+</div>

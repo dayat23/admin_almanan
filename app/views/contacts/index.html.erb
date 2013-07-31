@@ -1,0 +1,36 @@
+<h4 class="widgettitle">List Pesan Masuk</h4>
+<table class="table table-bordered" id="dyntable">
+ <colgroup>
+    <col class="con0" style="align: center; width: 4%" />
+    <col class="con1" />
+    <col class="con0" />
+ </colgroup>
+    <thead>
+        <tr>
+            <th class="head0 nosort">No.</th>
+            <th class="head0">Nama Lengkap</th>
+            <th class="head1">Email</th>
+            <th class="head1">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% i = 1
+      for contact in @contacts %>
+        <tr class="gradeX">
+            <td class="aligncenter">
+                <span class="center">
+                    <%= i %>
+                </span>
+            </td>
+            <td><%= contact.full_name %></td>
+            <td><%= contact.email %></td>
+            <td><%= link_to "<span class='icon-search'></span> Lihat".html_safe, contact %> | <%= link_to "<span class='icon-edit'></span> Edit".html_safe, edit_contact_path(contact) %> | <%= link_to "<span class='icon-trash'></span> Delete".html_safe, contact, method: :delete, confirm: 'Anda yakin?' %></td>
+        </tr>
+      <% i += 1
+      end %>
+    </tbody>
+</table>
+
+<p>
+<%= link_to "<span class='icon-plus'></span> Pesan Baru".html_safe, new_contact_path, class: "btn btn-primary" %>
+</p>

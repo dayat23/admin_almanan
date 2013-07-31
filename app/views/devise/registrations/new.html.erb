@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CV Al-Mananan AdminPanel</title>
+<%= stylesheet_link_tag "admin_app/style.default" %>
+<%= javascript_include_tag "admin_app/jquery-1.9.1.min" %>
+<%= javascript_include_tag "admin_app/jquery-migrate-1.1.1.min" %>
+</head>
+
+<body class="loginbody">
+
+<div class="loginwrapper">
+  <div class="loginwrap zindex100 animate2 bounceInDown">
+  <h1 class="logintitle"><span class="iconfa-lock"></span> Sign Up <span class="subtitle">Halo! Silahkan Login terlebih dahulu!</span></h1>
+        <div class="loginwrapperinner">
+          <% if notice %>
+            <div class="alert alert-info">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Selamat!</strong> <%= notice %>
+            </div><!--alert-->
+          <% end %>
+
+          <% if alert %>
+            <div class="alert alert-error">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>Error!</strong>
+              <%= alert %>
+            </div>
+          <% end %>
+
+            <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+                <p class="animate4 bounceIn"><%= f.email_field :email, id: "username", placeholder: "Email" ,:autofocus => true %></p>
+                <p class="animate5 bounceIn"><%= f.password_field :password, id: "password", placeholder: "Password"  %></p>
+                <p class="animate5 bounceIn"><%= f.password_field :password_confirmation, id: "passwordconfirm", placeholder: "Password Confirmation" %></p>
+                <p class="animate6 bounceIn"><%= f.button "Daftar", class: "btn btn-default btn-block" %></p>
+                <p class="animate7 fadeIn">
+                  <%- if controller_name != 'sessions' %>
+                    <%= link_to "Sign in", new_session_path(resource_name) %><br />
+                  <% end -%>
+                </p>
+            <% end %>
+        </div><!--loginwrapperinner-->
+    </div>
+    <div class="loginshadow animate3 fadeInUp"></div>
+</div><!--loginwrapper-->
+
+<script type="text/javascript">
+jQuery.noConflict();
+
+jQuery(document).ready(function(){
+  
+  var anievent = (jQuery.browser.webkit)? 'webkitAnimationEnd' : 'animationend';
+  jQuery('.loginwrap').bind(anievent,function(){
+    jQuery(this).removeClass('animate2 bounceInDown');
+  });
+  
+  jQuery('#username,#password,#passwordconfirm').focus(function(){
+    if(jQuery(this).hasClass('error')) jQuery(this).removeClass('error');
+  });
+  
+  jQuery('#new_admin_user button').click(function(){
+    if(!jQuery.browser.msie) {
+      if(jQuery('#username').val() == '' || jQuery('#password').val() == '' || jQuery('#passwordconfirm') == '' ) {
+        if(jQuery('#username').val() == '') jQuery('#username').addClass('error'); else jQuery('#username').removeClass('error');
+        if(jQuery('#password').val() == '') jQuery('#password').addClass('error'); else jQuery('#password').removeClass('error');
+        if(jQuery('#passwordconfirm').val() == '') jQuery('#passwordconfirm').addClass('error'); else jQuery('#passwordconfirm').removeClass('error');
+        jQuery('.loginwrap').addClass('animate0 wobble').bind(anievent,function(){
+          jQuery(this).removeClass('animate0 wobble');
+        });
+      } else {
+        return true;
+      }
+      return false;
+    }
+  });
+});
+</script>
+</body>
+</html>

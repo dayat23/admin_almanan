@@ -1,0 +1,20 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3 class="heading">Kategori <%= @category.name %> Detail</h3>
+    <fieldset>
+      <div class="control-group formSep">
+        <label class="control-label">Nama Kategori</label>
+        <div class="controls text_line">
+          <strong><%= @category.name %></strong>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
+          <%= link_to 'Back', categories_path, class: "btn" %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>

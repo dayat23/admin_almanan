@@ -1,0 +1,27 @@
+<%= form_for(@order, html: { class: 'form-horizontal well' }) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <p class="f_legend">Edit Order</p>
+    <div class="control-group">
+      <label class="control-label">Status Order</label>
+      <div class="controls">
+        <%= f.select :status, [['Belum dikirim', 0],['Sudah dikirim', 1]], class: 'span4', prompt: true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Simpan', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

@@ -1,0 +1,22 @@
+{"sEcho":"<%= @products["sEcho"] %>",
+"iTotalRecords":<%= @products["iTotalRecords"] %>,
+"iTotalDisplayRecords":<%= @products["iTotalDisplayRecords"] %>,
+"aaData":[
+<% 
+count = 0
+@products["aaData"].each do |product| 
+%>
+  [
+  "<%= link_to(product.category.name, product.category).tr('"', "'").html_safe %>",
+  "<%= link_to(product.code_product, product).tr('"', "'").html_safe %>",
+  "<%= product.name_product %>",
+  "<%= product.stock %>",
+  "<%= product.status == 1? "Aktif" : "Non Aktif" %>",
+  "<%= action_datatable_helper(product,edit_product_path(product), product_path(product)) %>"
+  ]
+  <%= ","  if count < (@products["aaData"].length - 1) %>
+  <% 
+  count = count + 1
+end 
+%>]
+}
